@@ -6,6 +6,7 @@
 
 (nodejs/enable-util-print!)
 (defonce moment (nodejs/require "moment"))
+(set! js/XMLHttpRequest (nodejs/require "xhr2"))
 
 (defn hello [event ctx cb]
   (println ctx)
