@@ -15,7 +15,9 @@ repositories {
 
 dependencies {
   implementation 'org.clojure:clojurescript:1.10.312'
+  implementation 'org.clojure:core.async:0.6.532'
   devImplementation 'org.clojure:java.classpath'
+  compile 'cljs-http:cljs-http:0.1.46'
 }
 
 clojurescript {
@@ -26,7 +28,8 @@ clojurescript {
         outputDir = 'js/out'
         target = 'nodejs'
         optimizations = 'simple'
-        npmDeps = ['dayjs': '1.8.17']
+        npmDeps = ['dayjs': '1.8.17',
+                   'xhr2': '0.2.0']
         installDeps = true
         verbose = true
       }

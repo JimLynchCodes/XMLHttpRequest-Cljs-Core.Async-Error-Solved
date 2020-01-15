@@ -70,6 +70,16 @@ functions:
       - http:
           path: now
           method: get
+
+  example:
+    handler: build/clojurescript/main/functions.example
+    events:
+      - http:
+          path: example
+          method: get
+
+plugins:
+  - serverless-offline
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

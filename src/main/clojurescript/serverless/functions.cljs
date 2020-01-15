@@ -1,5 +1,8 @@
 (ns serverless.functions
-  (:require [cljs.nodejs :as nodejs]))
+  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [cljs.nodejs :as nodejs]
+            [cljs-http.client :as http]
+            [cljs.core.async :refer [put! chan <!]]))
 
 (nodejs/enable-util-print!)
 (defonce moment (nodejs/require "moment"))
@@ -21,14 +24,14 @@
 
 (defn example [event ctx cb]
   (go (let [response (<! (http/get "https://sv443.net/jokeapi/category/Programming"))
-            theGloriousData  (->> response
+            the-glorious-data  (->> response
                                   (:body)
                                   (clj->js)
                                   (.stringify js/JSON))]
         (cb nil (clj->js
                  {:statusCode 200
                   :headers    {"Content-Type" "application/json"}
-                  :body       theGloriousData})))))
+                  :body       the-glorious-data})))))
 
 (set! (.-exports js/module) #js
                              {:hello hello
